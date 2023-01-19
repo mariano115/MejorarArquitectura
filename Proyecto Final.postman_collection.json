@@ -371,6 +371,78 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Mensajes",
+			"item": [
+				{
+					"name": "Crear Mensaje",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"pruebaemail@email.com\",\r\n    \"type\": \"usuario\",\r\n    \"text\": \"Hola!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/mensajes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mensajes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mensajes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/mensajes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mensajes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Mensajes por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/mensajes/63c826be511c6b184224c1b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mensajes",
+								"63c826be511c6b184224c1b3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
