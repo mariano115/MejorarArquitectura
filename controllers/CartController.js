@@ -14,12 +14,16 @@ const generatePurchaseSummary = async (cart) => {
 };
 
 const addProductToCart = async (req, res) => {
-  return await cartService.addProductToCart(
+  res.send(await cartService.addProductToCart(
     req.body.idProducto,
     req.body.idCarrito,
     req.body.cantidad
-  );
+  ))
 };
+
+const deleteCartById = async (req, res) => {
+  res.send(await cartService.deleteCartById(req.params.id))
+}
 
 const createEmptyCart = async (email, address) => {
   return await cartModel.create({
@@ -31,6 +35,7 @@ const createEmptyCart = async (email, address) => {
 };
 
 module.exports = {
+  deleteCartById,
   getCartById,
   addProductToCart,
   createEmptyCart,

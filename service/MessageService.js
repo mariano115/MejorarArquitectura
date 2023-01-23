@@ -1,14 +1,15 @@
-const messagesModel = require("../models/Messages.model");
 const { loggerDeclaration } = require("../tools/utils");
+const MyConnectionFactory = require("../DAOs/MessageDao/MessageFactoryDAO");
+const connectionDbb = new MyConnectionFactory().returnDbConnection();
 const logger = loggerDeclaration();
 
 const getMessages = async () => {
-  return await messagesModel.find();
+  return await connectionDbb.getMessages();
 };
 
 const getMessagesById = async (id) => {
   try {
-    return await messagesModel.findById(id);
+    return await connectionDbb.getMessagesById(id);
   } catch (error) {
     logger.warn("error in get message method getMessagesById");
     return { error: "error in get message" };
@@ -28,7 +29,7 @@ const addMessage = (message) => {
     message.text !== null
   ) {
     message.date = new Date().toISOString();
-    messagesModel.create(message);
+    connectionDbb.addMessage(message);
     return "Mensaje añadido"
   } else {
     logger.warn("error in creating message method addMessage");

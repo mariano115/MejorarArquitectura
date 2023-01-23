@@ -1,11 +1,13 @@
 const cartModel = require("../models/Cart.model");
 const ProductService  = require("./ProductsService");
 const { loggerDeclaration } = require("../tools/utils");
+const MyConnectionFactory = require("../DAOs/CartDao/CartFactoryDAO");
+const connectionDbb = new MyConnectionFactory().returnDbConnection();
 const logger = loggerDeclaration();
 
 const getCarts = async () => {
     try {
-      return await cartModel.find()
+      return await connectionDbb.getCarts()
     } catch (error) {
       return { error: "cart not found" };
     }
@@ -13,7 +15,7 @@ const getCarts = async () => {
 
 const getCartById = async (id) => {
   try {
-    return await cartModel.findById(id);
+    return await connectionDbb.getCartById(id);
   } catch (error) {
     return { error: "cart not found" };
   }
@@ -37,12 +39,7 @@ const generatePurchaseSummary = async (cart) => {
 const addProductToCart = async (idProduct, idCart, cantidad) => {
   try {
     const productToAdd = await ProductService.getProductById(idProduct);
-    const cart = await cartModel.updateOne(
-      { _id: idCart },
-      {
-        $push: { items: { product: productToAdd, quantity: cantidad } },
-      }
-    );
+    const cart = await connectionDbb.addProductToCart(idCart, productToAdd, cantidad);
     if (cart.modifiedCount > 0) {
       logger.info('se pudo agregar el producto al carrito')
 			return "El producto fue agregado correctamente"
@@ -56,13 +53,12 @@ const addProductToCart = async (idProduct, idCart, cantidad) => {
   }
 };
 
+const deleteCartById = async (id) => {
+  return await connectionDbb.deleteCartById(id)
+}
+
 const createEmptyCart = async (email, address) => {
-  return await cartModel.create({
-    email,
-    date: new Date().toISOString(),
-    items: [],
-    address,
-  });
+  return connectionDbb.createEmptyCart(email, address)
 };
 
 module.exports = {
@@ -70,5 +66,15 @@ module.exports = {
   addProductToCart,
   createEmptyCart,
   generatePurchaseSummary,
-  getCarts
+  getCarts,
+  deleteCartById
 };
+
+
+
+/* const cart = await cartModel.updateOne(
+      { _id: idCart },
+      {
+        $push: { items: { product: productToAdd, quantity: cantidad } },
+      }
+    ); */
