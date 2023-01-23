@@ -1,4 +1,3 @@
-const userModel = require("../models/User.model");
 const enviarMail = require("../tools/mails");
 const {
   loggerDeclaration,
@@ -6,17 +5,14 @@ const {
 } = require("../tools/utils");
 const logger = loggerDeclaration();
 const Config = require("../config");
-
-const existUser = async (email) => {
-  return await userModel.findOne({ email: email });
-};
+const MyConnectionFactory = require("../DAOs/UserDao/UserFactoryDAO")
+const connectionDbb = (new MyConnectionFactory).returnDbConnection()
 
 const createUser = async (userToCreate) => {
   try {
-    if ((await existUser(userToCreate.email)) == null) {
+    if ((await connectionDbb.findUserByEmail(userToCreate.email)) == null) {
       const newPhotoPath = `${Config.publicAvatarsUrl}${userToCreate.email}.jpg`;
-      const newUser = new userModel(userToCreate);
-      newUser.save();
+      const newUser = await connectionDbb.registerUser(userToCreate)
       const text =
         "Nuevo usuario creado: nombre: " +
         newUser.name +
@@ -45,4 +41,4 @@ const createUser = async (userToCreate) => {
   }
 };
 
-module.exports = { createUser, existUser };
+module.exports = { createUser };

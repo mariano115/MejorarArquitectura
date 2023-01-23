@@ -1,21 +1,24 @@
 const productsModel = require("../models/Products.model");
 const { loggerDeclaration } = require("../tools/utils");
+const MyConnectionFactory = require("../DAOs/ProductDao/ProductFactoryDAO");
+const connectionDbb = new MyConnectionFactory().returnDbConnection();
 const logger = loggerDeclaration();
 
 const getProducts = async () => {
-  return await productsModel.find();
+  return await connectionDbb.find();
 };
 
 const getProductById = async (id) => {
   try {
-    return await productsModel.findById(id);
+    return await connectionDbb.getProductById(id);
   } catch (error) {
+    console.log(error);
     logger.warn("error in get product method getProductById");
     return { error: "error in get product" };
   }
 };
 
-const addProduct = (product) => {
+const addProduct = async (product) => {
   if (
     product.description !== undefined &&
     product.description.trim() !== "" &&
@@ -30,7 +33,7 @@ const addProduct = (product) => {
     product.photo.trim() !== "" &&
     product.photo !== null
   ) {
-    productsModel.create(product);
+    await connectionDbb.addProduct(product);
   } else {
     logger.warn("error in creating product method addProduct");
     return { error: "error in creating product" };
@@ -39,7 +42,7 @@ const addProduct = (product) => {
 
 const deleteProductById = async (id) => {
   try {
-    return await productsModel.deleteOne({ id });
+    return await connectionDbb.deleteProductById(id);
   } catch (error) {
     logger.warn("error in deleting product method deleteProductById");
     return { error: "error in deleting product" };
@@ -48,15 +51,17 @@ const deleteProductById = async (id) => {
 
 const updateProductById = async (id, product) => {
   try {
-    return await productsModel.findByIdAndUpdate(
-      { _id: id },
-      { ...product },
-      { returnOriginal: false }
-    );
+    return connectionDbb.updateProductById(id, product);
   } catch (error) {
     logger.warn("error in modify product method updateProductById");
     return { error: "error in modify product" };
   }
 };
 
-module.exports = { getProducts, addProduct, getProductById, deleteProductById, updateProductById };
+module.exports = {
+  getProducts,
+  addProduct,
+  getProductById,
+  deleteProductById,
+  updateProductById,
+};
