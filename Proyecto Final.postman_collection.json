@@ -227,7 +227,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/carrito/63b83da2008a7a24604da8ce",
+							"raw": "http://localhost:9090/carrito/63b6f0d1508368e8dfd62860",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -235,7 +235,7 @@
 							"port": "9090",
 							"path": [
 								"carrito",
-								"63b83da2008a7a24604da8ce"
+								"63b6f0d1508368e8dfd62860"
 							]
 						}
 					},
@@ -330,7 +330,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/productos/63beccf12b3dfda9d2c234ba",
+							"raw": "http://localhost:9090/productos/63ceb602690d04c98d7a1f1b",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -338,7 +338,7 @@
 							"port": "9090",
 							"path": [
 								"productos",
-								"63beccf12b3dfda9d2c234ba"
+								"63ceb602690d04c98d7a1f1b"
 							]
 						}
 					},

@@ -1,10 +1,13 @@
 const { loggerDeclaration } = require("../tools/utils");
 const MyConnectionFactory = require("../DAOs/MessageDao/MessageFactoryDAO");
+const messageDTO = require("../DTOs/MessageDTO");
 const connectionDbb = new MyConnectionFactory().returnDbConnection();
 const logger = loggerDeclaration();
 
 const getMessages = async () => {
-  return await connectionDbb.getMessages();
+  const messages = await connectionDbb.getMessages();
+  const messagesDTO = messages.map(message => messageDTO(message));
+  return messagesDTO
 };
 
 const getMessagesById = async (id) => {

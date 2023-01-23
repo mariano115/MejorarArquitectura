@@ -1,16 +1,19 @@
 const productsModel = require("../models/Products.model");
 const { loggerDeclaration } = require("../tools/utils");
 const MyConnectionFactory = require("../DAOs/ProductDao/ProductFactoryDAO");
+const productDTO = require("../DTOs/ProductDTO");
 const connectionDbb = new MyConnectionFactory().returnDbConnection();
 const logger = loggerDeclaration();
 
 const getProducts = async () => {
-  return await connectionDbb.find();
+  const products = await connectionDbb.find();
+  const productsDTO = products.map((product) => productDTO(product));
+  return productsDTO;
 };
 
 const getProductById = async (id) => {
   try {
-    return await connectionDbb.getProductById(id);
+    return productDTO(await connectionDbb.getProductById(id));
   } catch (error) {
     console.log(error);
     logger.warn("error in get product method getProductById");
