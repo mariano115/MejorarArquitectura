@@ -47,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"prueba1@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"nombreTest1\",\r\n    \"address\": \"Calle falsa 123\",\r\n    \"age\": 22,\r\n    \"phone\": \"+54 1167876544\",\r\n    \"photo\": \"https://assets.puzzlefactory.pl/puzzle/353/899/original.jpg\"\r\n}",
+							"raw": "{\r\n    \"email\": \"prueba4@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"nombreTest2\",\r\n    \"address\": \"Calle falsa 123\",\r\n    \"age\": 22,\r\n    \"phone\": \"+54 1167876544\",\r\n    \"photo\": \"https://assets.puzzlefactory.pl/puzzle/353/899/original.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -165,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idProducto\": \"63b6df93eddfc29bed560e0b\",\r\n    \"idCarrito\": \"63bec6668b018644e5f1684e\",\r\n    \"cantidad\": 5\r\n}",
+							"raw": "{\r\n    \"idProducto\": \"63ceb602690d04c98d7a1f1b\",\r\n    \"idCarrito\": \"63b8426e7e8cf968fe3ec53a\",\r\n    \"cantidad\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -187,12 +187,21 @@
 					"response": []
 				},
 				{
-					"name": "Obtener Carrito por id",
+					"name": "Delete Cart por Id",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProducto\": \"63ceb602690d04c98d7a1f1b\",\r\n    \"idCarrito\": \"63b8426e7e8cf968fe3ec53a\",\r\n    \"cantidad\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:9090/carrito/63bec6668b018644e5f1684e",
+							"raw": "http://localhost:9090/carrito/63b83da2008a7a24604da8ce?admin=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -200,7 +209,33 @@
 							"port": "9090",
 							"path": [
 								"carrito",
-								"63bec6668b018644e5f1684e"
+								"63b83da2008a7a24604da8ce"
+							],
+							"query": [
+								{
+									"key": "admin",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Carrito por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/carrito/63b83da2008a7a24604da8ce",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"carrito",
+								"63b83da2008a7a24604da8ce"
 							]
 						}
 					},
@@ -243,7 +278,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"description\": \"remera\",\r\n    \"price\": 50,\r\n    \"category\": \"Indumentaria\",\r\n    \"photo\": \"foto remera\"\r\n}",
+							"raw": "{\r\n    \"description\": \"remera\",\r\n    \"price\": 90,\r\n    \"category\": \"indumentaria\",\r\n    \"photo\": \"foto remera\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,7 +330,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/productos/63b6df93eddfc29bed560e0b",
+							"raw": "http://localhost:9090/productos/63beccf12b3dfda9d2c234ba",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -303,7 +338,7 @@
 							"port": "9090",
 							"path": [
 								"productos",
-								"63b6df93eddfc29bed560e0b"
+								"63beccf12b3dfda9d2c234ba"
 							]
 						}
 					},
@@ -315,7 +350,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/productos/63b6df93eddfc29bed560e0b?admin=true",
+							"raw": "http://localhost:9090/productos/63ceb59b5030199fc9f88b8a?admin=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -323,7 +358,7 @@
 							"port": "9090",
 							"path": [
 								"productos",
-								"63b6df93eddfc29bed560e0b"
+								"63ceb59b5030199fc9f88b8a"
 							],
 							"query": [
 								{
@@ -342,7 +377,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category\": \"category modificacion\"\r\n}",
+							"raw": "{\r\n    \"category\": \"category modificacion2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,7 +417,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"pruebaemail@email.com\",\r\n    \"type\": \"usuario\",\r\n    \"text\": \"Hola!\"\r\n}",
+							"raw": "{\r\n    \"email\": \"pruebaemail@email.com\",\r\n    \"type\": \"usuario2\",\r\n    \"text\": \"Hola! como estas?\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
